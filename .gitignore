@@ -1,0 +1,12 @@
+# IDE's
+.idea/
+
+# Log files
+*.log
+
+# Config files
+config.yml
+
+# Binaries
+*.exe
+brainfuck-discord-bot
