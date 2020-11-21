@@ -12,7 +12,8 @@ func helpCommand(args ...string) (*dgo.MessageEmbed, error) {
 			{
 				Name: "Available commands",
 				Value: "`!bf help` - Prints this message\n" +
-					"`!bf exec [input] <program>` - Executes a brainfuck program",
+					"`!bf exec [input] <program>` - Executes a brainfuck program\n" +
+					"`!bf encode <target_output>` - Creates a Brainfuck program that outputs the characters in the target output",
 				Inline: false,
 			},
 		},

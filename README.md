@@ -18,13 +18,14 @@ The easiest way to start using the bot is to invite it to your discord server vi
 
 * `exec [input] <program>` - Executes a brainfuck program
 
+* `encode <target_output>` - Creates a Brainfuck program that outputs the characters in the target output
+
 
 ## Examples
 
 ### Simple "Hello World"
 
-This is a short Hello World program. It's possible to include characters other than the ones from Brainfuck instructions, they will be ignored when running the program.
-Here that possibility is being used to insert a comment on the program. Note that if your program has spaces in it, please surround it with `"`.
+This is a short Hello World program.
 
 ![Brainfuck bot executing the a Hello World program](https://media.discordapp.net/attachments/246378961603526666/779766384975544360/discord_bot.png)
 
@@ -34,3 +35,8 @@ In this example, the numbers 67 and 68 are given as input to the program. The pr
 
 ![Brainfuck bot executing a program with input](https://media.discordapp.net/attachments/737687180331319459/779767672690704394/discord_bot_input.png)
 
+### Encoding outputs
+
+You can also generate programs that produce a desired output.
+
+![Brainfuck bot encoding output into a Brainfuck program](https://media.discordapp.net/attachments/246378961603526666/779818344877391872/unknown.png)

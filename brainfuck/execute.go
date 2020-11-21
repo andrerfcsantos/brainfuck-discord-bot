@@ -168,6 +168,6 @@ func (p *Program) Execute(inputs ...int) (*ExecutionResult, error) {
 // ExecutionResult contains information about a successful execution of a Brainfuck program
 type ExecutionResult struct {
 	Output               string `json:"output"`
-	InstructionsExecuted int `json:"instructions_executed"`
-	MemoryCellsUsed      int `json:"memory_cells_used"`
+	InstructionsExecuted int    `json:"instructions_executed"`
+	MemoryCellsUsed      int    `json:"memory_cells_used"`
 }

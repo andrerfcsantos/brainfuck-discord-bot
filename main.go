@@ -86,7 +86,6 @@ func newMessageHandler(s *dgo.Session, m *dgo.MessageCreate) {
 	}
 
 	args := ParseCommand(m.Content)
-	fmt.Printf("args: %#v\n", args)
 
 	// Check if the message is intended for this bot
 	if len(args) == 0 || args[0] != bot_prefix {
@@ -107,6 +106,8 @@ func newMessageHandler(s *dgo.Session, m *dgo.MessageCreate) {
 		outMessage, err = helpCommand(args[1:]...)
 	case "exec":
 		outMessage, err = execCommand(args[1:]...)
+	case "encode":
+		outMessage, err = encodeCommand(args[1:]...)
 	default:
 		err = fmt.Errorf("Command **%v** does not exist: type `%v help` to see the list of available commands", args[1], bot_prefix)
 		outMessage = &dgo.MessageEmbed{
