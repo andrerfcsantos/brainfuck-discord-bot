@@ -109,6 +109,8 @@ func (p *Program) Execute(inputs ...int) (*ExecutionResult, error) {
 		insExec <= MaxExecInstructions &&
 		currentMemSize <= MaxMemory {
 		i := p.Instructions[pc]
+		nInstructions := i.Value
+
 		switch i.InstructionType {
 		case Nop:
 		case IncrementDataPointer:
@@ -120,19 +122,27 @@ func (p *Program) Execute(inputs ...int) (*ExecutionResult, error) {
 		case DecrementData:
 			p.DecMemValue(ap, int8(i.Value))
 		case Output:
-			out.WriteRune(rune(p.GetMemValue(ap)))
+			r := rune(p.GetMemValue(ap))
+			for k := 0; k < i.Value; k++ {
+				out.WriteRune(r)
+			}
+
 		case Input:
 			if nInputs == 0 {
 				return nil, fmt.Errorf("there is an input instruction at position %v, but no inputs were given: please provide at least 1 input to this program", pc)
 			}
-			p.SetMemValue(ap, int8(inputs[currInput%nInputs]))
-			currInput++
+			for k := 0; k < i.Value; k++ {
+				p.SetMemValue(ap, int8(inputs[currInput%nInputs]))
+				currInput++
+			}
 		case JmpForwardIfEqZero:
+			nInstructions = 1
 			if p.GetMemValue(ap) == 0 {
 				pc = i.Value
 				continue
 			}
 		case JmpBackwardsIfEqNotZero:
+			nInstructions = 1
 			if p.GetMemValue(ap) != 0 {
 				pc = i.Value
 				continue
@@ -146,7 +156,7 @@ func (p *Program) Execute(inputs ...int) (*ExecutionResult, error) {
 		default:
 		}
 		pc++
-		insExec++
+		insExec += nInstructions
 		currentMemSize = len(p.Memory)
 	}
 

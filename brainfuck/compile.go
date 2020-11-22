@@ -2,6 +2,20 @@ package brainfuck
 
 import "fmt"
 
+var optimizableOpChars = map[rune]bool{
+	'<': true,
+	'>': true,
+	'+': true,
+	'-': true,
+	',': true,
+	'.': true,
+}
+
+func isOptimizableOpChar(c rune) bool {
+	_, ok := optimizableOpChars[c]
+	return ok
+}
+
 // Compile compiles a string representing a brainfuck program into a representation
 // that can be executed (see the (*Program).Execute() method)
 // The program string may contain characters that are not Brainfuck instructions -
@@ -20,10 +34,21 @@ func Compile(program string) (*Program, error) {
 	var nesting int
 	var openBracketsStack []int
 
+	lastRune := ' '
+
 	for i := 0; i < n; i++ {
 		var ins Instruction
+		r := progRunes[i]
 
-		switch progRunes[i] {
+		if isOptimizableOpChar(r) && lastRune == r {
+			p.Instructions[len(p.Instructions)-1].Value++
+			if i == n-1 {
+				p.Instructions = append(p.Instructions, ins)
+			}
+			continue
+		}
+
+		switch r {
 		case '>':
 			ins.InstructionType = IncrementDataPointer
 			ins.Value = 1
@@ -66,9 +91,11 @@ func Compile(program string) (*Program, error) {
 
 		case '.':
 			ins.InstructionType = Output
+			ins.Value = 1
 			p.Instructions = append(p.Instructions, ins)
 		case ',':
 			ins.InstructionType = Input
+			ins.Value = 1
 			p.Instructions = append(p.Instructions, ins)
 		default:
 		}
