@@ -20,6 +20,8 @@ The easiest way to start using the bot is to invite it to your discord server vi
 
 * `encode <target_output>` - Creates a Brainfuck program that outputs the characters in the target output
 
+* `shorten <program>` - Creates a shorter version of the program. Aliases: `short`
+
 
 ## Examples
 
@@ -40,3 +42,10 @@ In this example, the numbers 67 and 68 are given as input to the program. The pr
 You can also generate programs that produce a desired output.
 
 ![Brainfuck bot encoding output into a Brainfuck program](https://media.discordapp.net/attachments/246378961603526666/779818344877391872/unknown.png)
+
+
+### Shorten programs
+
+Get a shorter version of programs. For some programs, this shorter version can help readability.
+
+![Brainfuck bot encoding output into a Brainfuck program](https://media.discordapp.net/attachments/737687180331319459/780206837353545728/unknown.png)

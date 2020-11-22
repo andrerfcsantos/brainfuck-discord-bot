@@ -108,6 +108,10 @@ func newMessageHandler(s *dgo.Session, m *dgo.MessageCreate) {
 		outMessage, err = execCommand(args[1:]...)
 	case "encode":
 		outMessage, err = encodeCommand(args[1:]...)
+	case "shorten":
+		fallthrough
+	case "short":
+		outMessage, err = shortenCommand(args[1:]...)
 	default:
 		err = fmt.Errorf("Command **%v** does not exist: type `%v help` to see the list of available commands", args[1], bot_prefix)
 		outMessage = &dgo.MessageEmbed{
