@@ -6,7 +6,7 @@ import (
 )
 
 // Max Memory cells a Brainfuck program is allowed to use
-const MaxMemory = 30000
+const MaxMemory = 30_000
 
 // Max number of instructions that will be executed before giving up.
 // This is a protection against infinite loops or programs that will
@@ -151,7 +151,7 @@ func (p *Program) Execute(inputs ...int) (*ExecutionResult, error) {
 	}
 
 	if insExec > MaxExecInstructions {
-		return nil, fmt.Errorf("the program reached the maximum number os instructions allowed (%v): this can mean the code has an infinite loop", MaxExecInstructions)
+		return nil, fmt.Errorf("the program reached the maximum number of instructions allowed (%v) and so it was stopped", MaxExecInstructions)
 	}
 
 	if currentMemSize > MaxMemory {
